@@ -1,14 +1,17 @@
 import { ProductsIndex } from "./ProductsIndex";
 import axios from "axios";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { ProductsNew } from "./ProductsNew";
-import {Modal} from "./Modal";
+import { Modal } from "./Modal";
+import { Signup } from "./Signup";
+import { Login } from "./Login";
+import { Routes, Route } from "react-router-dom";
 
 
 export function Content() {
 
   const [products,setProducts] = useState([]);
-  const [isProductShowVisable, setIsProductShowVisable] = useState(false);
+  const [isProductsShowVisible, setIsProductsShowVisible] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
 
   const handleIndexProducts = () => {
@@ -29,16 +32,31 @@ export function Content() {
     });
   };
 
-  const 
+  const handleShowProduct = (product) => {
+    console.log("handleShowProduct", product);
+    setIsProductsShowVisible(true);
+    setCurrentProduct(product);
+  };
+
+  const handleClose = () => {
+    console.log("handleClose");
+    setIsProductsShowVisible(false);
+  };
 
   return (
-    <div>
-      <h1>Welcome to React!</h1>
-      <ProductsIndex products = {products}/>
-      <ProductsNew onCreateProduct={handleCreateProduct}/>
-      <Modal show={true}>
+    <div className="container">
+    
+      <Routes>
+        <Route path ="/signup" element={<Signup/>}/>
+        <Route path ="/login" element={<Login/>}/>
+        <Route path ="/" element = {< ProductsIndex products = {products} onShowProduct={handleShowProduct}/>}/>
+        <Route path = "/products/new" element = {<ProductsNew onCreateProduct={handleCreateProduct}/>}/>
+      </Routes>
+      
+      <Modal show={isProductsShowVisible} onClose={handleClose}>
         <p>test</p>
       </Modal>
+
     </div>
   );
 }
