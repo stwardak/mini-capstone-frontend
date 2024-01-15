@@ -6,7 +6,8 @@ import { Modal } from "./Modal";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { Routes, Route } from "react-router-dom";
-
+import { ProductsShow } from "./ProductsShow";
+import { CartedProductsIndex} from "./CartedProductsIndex";
 
 export function Content() {
 
@@ -43,6 +44,9 @@ export function Content() {
     setIsProductsShowVisible(false);
   };
 
+
+
+
   return (
     <div className="container">
     
@@ -51,10 +55,12 @@ export function Content() {
         <Route path ="/login" element={<Login/>}/>
         <Route path ="/" element = {< ProductsIndex products = {products} onShowProduct={handleShowProduct}/>}/>
         <Route path = "/products/new" element = {<ProductsNew onCreateProduct={handleCreateProduct}/>}/>
+        {/* <Route path ="/products/show" element = {< ProductsShow products = {products} onShowProduct={handleShowProduct}/>}/> */}
+        <Route path="/carted_products" element = {<CartedProductsIndex/>}/>
       </Routes>
       
       <Modal show={isProductsShowVisible} onClose={handleClose}>
-        <p>test</p>
+        <ProductsShow product = {currentProduct}/>
       </Modal>
 
     </div>
