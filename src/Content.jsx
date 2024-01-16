@@ -8,6 +8,8 @@ import { Login } from "./Login";
 import { Routes, Route } from "react-router-dom";
 import { ProductsShow } from "./ProductsShow";
 import { CartedProductsIndex} from "./CartedProductsIndex";
+import { OrdersIndex } from "./OrdersIndex"
+import { OrdersShow } from './OrdersShow'
 
 export function Content() {
 
@@ -23,7 +25,7 @@ export function Content() {
     });
   };
 
-  useEffect(handleIndexProducts, []);
+
 
   const handleCreateProduct = (params, successCallback) => {
     console.log("handleCreateProduct", params);
@@ -46,6 +48,7 @@ export function Content() {
 
 
 
+  useEffect(handleIndexProducts, []);
 
   return (
     <div className="container">
@@ -57,6 +60,8 @@ export function Content() {
         <Route path = "/products/new" element = {<ProductsNew onCreateProduct={handleCreateProduct}/>}/>
         {/* <Route path ="/products/show" element = {< ProductsShow products = {products} onShowProduct={handleShowProduct}/>}/> */}
         <Route path="/carted_products" element = {<CartedProductsIndex/>}/>
+        <Route path="/orders" element={<OrdersIndex />}/>
+        <Route path="/orders/:id" element={<OrdersShow />} />
       </Routes>
       
       <Modal show={isProductsShowVisible} onClose={handleClose}>
