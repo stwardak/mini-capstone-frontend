@@ -1,13 +1,23 @@
+import { useState } from "react";
+
 export function ProductsIndex(props) {
   
+  const [searchFilter, setSearchFilter] = useState("");
   
-  
+
   return (
 
     <div id="products-index">
+      <p>Search: <input type="text" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value)} list="names"/></p>
+
       <h1>All Products</h1>
         <div className="row">
-         {props.products.map((product) => (
+         {props.products.filter(
+          (product) => product.name.toLowerCase()
+          .includes(searchFilter.toLowerCase()) ||
+          product.description.toLowerCase().includes(searchFilter.toLowerCase())
+         )
+         .map((product) => (
           <div key={product.id} className="col-sm-4">
             <div className="card">
               <div className="card-body">
