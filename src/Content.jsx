@@ -65,7 +65,7 @@ export function Content() {
       </Routes>
       
       <Modal show={isProductsShowVisible} onClose={handleClose}>
-        <ProductsShow product = {currentProduct}/>
+        <ProductsShow product = {currentProduct} onClose={handleClose}/>
       </Modal>
 
     </div>
