@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 export function ProductsNew(props) {
 
   const [suppliers, setSuppliers] = useState ([])
+  const [images, setImages] = useState([""])
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,6 +19,13 @@ export function ProductsNew(props) {
       console.log(response.data);
       setSuppliers(response.data);
     })
+  }
+
+  const addImage = () => {
+    console.log('addding image')
+    // add an element to the array
+    // suppliers.push('')
+    setImages([...images, '']);
   }
 
   useEffect(productsIndex, [])
@@ -38,6 +46,11 @@ export function ProductsNew(props) {
           Price: <input name = "price" type = "text"/>
         </div>
         <div>
+        {images.map(image => (          
+          <p>Image<input name="images[]" type="text" /></p>        
+        ))}
+        </div>
+        <div>
           Description: <input name = "description" type = "text"/>
         </div>
         <div>
@@ -50,6 +63,7 @@ export function ProductsNew(props) {
         </div>
         <button type="submit">Add Product</button>
       </form>
+      <p><button onClick={addImage}>add more images</button></p>
     </div>
   )
 }
