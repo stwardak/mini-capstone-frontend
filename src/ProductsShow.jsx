@@ -17,7 +17,7 @@ export function ProductsShow(props) {
     })
 
     };
-  
+
 
   return (
     <div>
